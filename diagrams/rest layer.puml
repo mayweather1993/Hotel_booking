@@ -1,0 +1,44 @@
+@startuml
+
+class BookingController{
+ + ResponseEntity create(BookingVM vm)
+ + ResponseEntity getPage(Pageable pageable)
+ + ResponseEntity getById(Long id)
+ + ResponseEntity delete(Long id)
+ + ResponseEntity update(Long id,BookingVM bookingVM)
+ - BookingVM toVM(BookingEntity entity)
+ - BookingEntity toEntity(BookingVM vm)
+}
+
+class HotelController{
+ + public ResponseEntity create(HotelVM vm)
+ + ResponseEntity getPage(Pageable pageable)
+ + ResponseEntity getById(Long id)
+ + ResponseEntity delete(Long id)
+ + ResponseEntity update(Long id,HotelVM hotelVM)
+ - HotelVM toVM(HotelEntity entity)
+ - HotelEntity toEntity(HotelVM vm)
+}
+
+class RoomController{
+ + ResponseEntity create(RoomVM roomVM)
+ + ResponseEntity getPage(RoomCategory category,Pageable pageable)
+ + ResponseEntity getById(Long id)
+ + ResponseEntity delete(Long id)
+ + ResponseEntity update(Long id,RoomVM roomVM)
+ - RoomVM toVM(RoomEntity entity)
+ - RoomEntity toEntity(RoomVM roomVM)
+}
+
+class UserController{
+ + ResponseEntity create(UserVM vm)
+ + ResponseEntity getPage(Pageable pageable)
+ + ResponseEntity getById(Long id)
+ + ResponseEntity getUserBookings(Long id)
+ + ResponseEntity update(Long id,UserVM userVM)
+ - UserVM toVM(UserEntity entity)
+ - UserEntity toEntity(UserVM vm)
+}
+
+
+@enduml

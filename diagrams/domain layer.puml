@@ -1,0 +1,68 @@
+@startuml
+
+package domain {
+   interface Auditable{
+   + setCreatedDate(Instant createdDate);
+   + setLastModifiedDate(Instant lastModifiedDate);
+   }
+
+   class BookingEntity implements Auditable {
+      Long id
+      Instant fromDate;
+      Instant toDate;
+      List<RoomEntity> rooms;
+      Instant lastModifiedDate;
+      Instant createdDate;
+      UserEntity user;
+      Double price;
+    }
+
+    class HotelEntity implements Auditable{
+    Long id;
+    String name;
+    int stars;
+    Instant createdDate;
+    Instant lastModifiedDate;
+    }
+
+     class RoomEntity implements Auditable{
+        Long id;
+        Double price;
+        HotelEntity hotel;
+        RoomCategory category;
+        Instant createdDate;
+        Instant lastModifiedDate;
+        List<BookingEntity> bookings;
+        List<AdditionalOptionsEntity> additionalOptionEntities;
+    }
+
+    class UserEntity implements Auditable{
+    Long id;
+    String email;
+    Instant createdDate;
+    Instant lastModifiedDate;
+    List<BookingEntity> bookings = new ArrayList<>();
+    }
+
+    enum RoomCategory{
+    BASIC, LUX, SUPERIOR, PRESIDENT
+    }
+
+    class BookingsDTO {
+        Instant from;
+        Instant to;
+        List<String> rooms;
+        Double totalPrice;
+    }
+}
+
+package repositories {
+    interface BookingsRepository extends JpaRepository
+    interface HotelsRepository extends JpaRepository
+    interface RoomsRepository extends JpaRepository{
+    + Page<RoomEntity> findAllByCategory(RoomCategory category,Pageable pageable);
+    }
+    interface UsersRepository extends JpaRepository
+    interface AdditionalOptionsRepository extends JpaRepository
+}
+@enduml

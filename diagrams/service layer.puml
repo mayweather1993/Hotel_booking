@@ -1,0 +1,47 @@
+@startuml
+    abstract class AbstractService<T extends JpaRepository<E, Long>, E>{
+    + E save(E entity)
+    + E findById(Long id)
+    + void delete(Long id)
+    + Page<E> getPerPage(Pageable pageable)
+    }
+
+    interface CrudService<T> {
+       + T save(T object);
+       + T findById(Long id);
+       + void delete(Long id);
+       + Page<T> getPerPage(Pageable pageable);
+    }
+
+    interface UsersService extends CrudService {
+      + Set<BookingsDTO> getBookings(Long userId);
+    }
+    class UsersServiceImpl extends AbstractService implements UsersService {
+      + Set<BookingsDTO> getBookings(Long userId)
+    }
+
+    interface RoomsService extends CrudService {
+       + Page<RoomEntity> findByCategory(RoomCategory category,Pageable pageable);
+    }
+
+   class RoomsServiceImpl extends AbstractService implements RoomsService {
+       +  Page<RoomEntity> findByCategory(RoomCategory category,Pageable pageable)
+   }
+
+
+   interface RoomOptionsService extends CrudService
+
+   class RoomOptionsServiceImpl extends AbstractService implements RoomOptionsService
+
+   interface HotelsService extends CrudService
+
+   class HotelsServiceImpl extends AbstractService implements HotelsService
+
+   interface BookingsService extends CrudService
+
+   class BookingsServiceImpl extends AbstractService implements BookingsService {
+    + BookingEntity save(BookingEntity entity)
+    - double calculatePrice(List<RoomEntity> rooms,long days)
+   }
+
+@enduml
