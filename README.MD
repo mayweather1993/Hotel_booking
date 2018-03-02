@@ -45,11 +45,9 @@ So,there are our end-points.
 
 ##Features in progress
 
-1.
-sending an email to the user to calculate the cost of his rest
+1. sending an email to the user to calculate the cost of his rest
 
-2.
-promo codes for users
+2. promo codes for users
 
 
 ### Working with Users
